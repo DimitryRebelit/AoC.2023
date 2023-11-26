@@ -21,14 +21,18 @@ public abstract class BasePuzzle
     {
         var resourcePath = "Resources/";
         var resourceName = isSample ? $"AoC.2023.Puzzles.{puzzle}.sample.txt" : $"AoC.2023.Puzzles.{puzzle}.txt";
+        var path = $"{resourcePath}{resourceName}";
 
-        using var stream = new StreamReader($"{resourcePath}{resourceName}");
-        var lines = new List<string>();
+        if (!File.Exists(path))
+            throw new FileNotFoundException($"Input file not found: {path}");
+
+        using var stream = new StreamReader(path);
+        var result = new List<string>();
         while (!stream.EndOfStream)
         {
             var line = await stream.ReadLineAsync();
-            lines.Add(string.IsNullOrWhiteSpace(line) ? string.Empty : line);
+            result.Add(string.IsNullOrWhiteSpace(line) ? string.Empty : line);
         }
-        return lines;
+        return result;
     }
 }
