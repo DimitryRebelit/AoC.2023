@@ -1,3 +1,7 @@
+using System.Diagnostics;
+
+namespace AoC.Puzzles;
+
 /// <summary>
 ///    Base class for the advent of code solutions.
 /// </summary>
@@ -6,6 +10,41 @@
 /// </remarks>
 public abstract class BasePuzzle
 {
+    private const string ResourcePath = "Resources/";
+
+    /// <summary>
+    ///     Title of the puzzle
+    /// </summary>
+    protected abstract string Title { get; }
+
+    /// <summary>
+    ///     Solve part one of the puzzle
+    /// </summary>
+    /// <returns></returns>
+    protected abstract Task SolvePartOneAsync();
+
+    /// <summary>
+    ///     Solve part two of the puzzle
+    /// </summary>
+    /// <returns></returns>
+    protected abstract Task SolvePartTwoAsync();
+
+    /// <summary>
+    ///    Solve the puzzle
+    /// </summary>
+    public async Task SolveAsync()
+    {
+        Console.WriteLine();
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
+        Console.WriteLine($"{Title}");
+        await SolvePartOneAsync();
+        await SolvePartTwoAsync();
+        stopwatch.Stop();
+        Console.WriteLine($"--- Solved in {stopwatch.ElapsedMilliseconds}ms ---");
+        Console.WriteLine();
+    }
+
     /// <summary>
     ///     Open the input file for the puzzle.
     /// </summary>
@@ -15,11 +54,10 @@ public abstract class BasePuzzle
     ///     The input file is expected to be in the Resources folder and named AoC.Puzzles.{puzzle}.txt
     /// </remarks>
     /// <returns></returns>
-    public virtual async Task<List<string>> ReadAllLinesFromInputAsync(int puzzle, int part, bool isSample = false)
+    protected async Task<List<string>> ReadAllLinesFromInputAsync(int puzzle, int part, bool isSample = false)
     {
-        var resourcePath = "Resources/";
         var resourceName = isSample ? $"AoC.Puzzles.{puzzle}.{part}.sample.txt" : $"AoC.Puzzles.{puzzle}.{part}.txt";
-        var path = $"{resourcePath}{resourceName}";
+        var path = $"{ResourcePath}{resourceName}";
 
         if (!File.Exists(path))
             throw new FileNotFoundException($"Input file not found: {path}");
@@ -33,6 +71,4 @@ public abstract class BasePuzzle
         }
         return result;
     }
-
-
 }

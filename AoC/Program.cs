@@ -1,4 +1,6 @@
-﻿Console.WriteLine("         |");
+﻿using AoC.Puzzles;
+
+Console.WriteLine("         |");
 Console.WriteLine("        -+-");
 Console.WriteLine("         A");
 Console.WriteLine("        /=\\               /\\  /\\    ___  _ __  _ __ __    __");
@@ -14,16 +16,12 @@ Console.WriteLine("  /  O   i   O  \\      /_/\\_\\      \\ \\ \\/ / / \\__,_|\\
 Console.WriteLine("i/ *   O   O   * \\i");
 Console.WriteLine("/=================\\");
 Console.WriteLine("       |___|");
-Console.WriteLine("");
-Console.WriteLine("");
 
-var solvedPuzzles = new List<IPuzzle>() {new Puzzle1()};
+var solvedPuzzles = new List<BasePuzzle>() {new Puzzle1()};
 
 foreach (var puzzle in solvedPuzzles)
 {
-    Console.WriteLine(puzzle.Description);
-    await puzzle.SolvePartOneAsync();
-    await puzzle.SolvePartTwoAsync();
+    await puzzle.SolveAsync();
 }
 
 Console.ReadKey();

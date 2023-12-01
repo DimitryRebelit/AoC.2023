@@ -1,23 +1,26 @@
 using System.Text.RegularExpressions;
+using AoC.Puzzles;
 
 /// <summary>
 ///     Solution for Puzzle 1 of Advent of Code 2023.
 /// </summary>
-public class Puzzle1 : BasePuzzle, IPuzzle
+public class Puzzle1 : BasePuzzle
 {
-    /// <inheritdoc />
-    public string Description => "--- Day 1: Trebuchet?! ---";
+    private static readonly string[] s_numbers = { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
 
     /// <inheritdoc />
-    public async Task SolvePartOneAsync()
+    protected override string Title => "--- Day 1: Trebuchet?! ---";
+
+    /// <inheritdoc />
+    protected override async Task SolvePartOneAsync()
     {
         var input = await base.ReadAllLinesFromInputAsync(1,1);
         var result = input.Select(GetFirstAndLastNumber).ToList();
-        Console.WriteLine($"    Result: {result.Sum()}");
+        Console.WriteLine($"Result: {result.Sum()}");
     }
 
     /// <inheritdoc />
-    public async Task SolvePartTwoAsync()
+    protected override async Task SolvePartTwoAsync()
     {
         var input = await base.ReadAllLinesFromInputAsync(1,2);
         var result = input
@@ -25,7 +28,7 @@ public class Puzzle1 : BasePuzzle, IPuzzle
             .Select(GetFirstAndLastNumber)
             .ToList();
 
-        Console.WriteLine($"    Result: {result.Sum()}");
+        Console.WriteLine($"Result: {result.Sum()}");
     }
 
     /// <summary>
@@ -46,7 +49,7 @@ public class Puzzle1 : BasePuzzle, IPuzzle
         {
             var matchedValue = numberWordMatch.Groups[1].Value;
             var number = char.IsLetter(matchedValue[0]) ?
-                (Array.IndexOf(new[] { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" }, matchedValue) + 1).ToString() :
+                (Array.IndexOf(s_numbers, matchedValue) + 1).ToString() :
                 matchedValue;
 
             replacedLine += number;
