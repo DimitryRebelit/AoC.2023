@@ -14,7 +14,6 @@ public interface IPuzzle
     /// <returns></returns>
     Task SolvePartOneAsync();
 
-
     /// <summary>
     ///     Solve part two of the puzzle
     /// </summary>

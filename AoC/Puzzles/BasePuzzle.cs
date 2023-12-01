@@ -33,4 +33,6 @@ public abstract class BasePuzzle
         }
         return result;
     }
+
+
 }
