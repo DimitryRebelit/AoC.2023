@@ -3,8 +3,6 @@
 AoC.2023.sln,c\7\c71477ca51f193f4c0a5a7a653127ef77576fff3
 F
 AoC/Puzzles/Puzzle1.cs,8\b\8b40797ec57a87e6e0396414a51c5661cf72ef98
-I
-AoC/Interfaces/IPuzzle.cs,d\7\d7fb59810ee8e8e2d4f4dc5f9481c3eedd4b2062
 >
 AoC/Program.cs,4\c\4cddb3bff7b38e06ec7a502045537a8ee6fcded3
 I
@@ -17,3 +15,8 @@ X
 (AoC/Resources/AoC.Puzzles.1.2.sample.txt,5\d\5d3c11f522ede9dc2a97d6f420396ecc6a523ae1
 Q
 !AoC/Resources/AoC.Puzzles.1.2.txt,4\4\44108e8d308929b17f32690d1139843e173d45d9
+=
+.editorconfig,6\2\626a747c8694eaae66f2afb3d1a745b045782c70
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
