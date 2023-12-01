@@ -1,5 +1,3 @@
-namespace AoC.2023.Puzzles;
-
 /// <summary>
 ///    Base class for the advent of code solutions.
 /// </summary>
@@ -14,13 +12,13 @@ public abstract class BasePuzzle
     /// <param name="puzzle">Number of the puzzle</param>
     /// <param name="isSample">Whether to load the sample input file</param>
     /// <remarks>
-    ///     The input file is expected to be in the Resources folder and named AoC.2023.Puzzles.{puzzle}.txt
+    ///     The input file is expected to be in the Resources folder and named AoC.Puzzles.{puzzle}.txt
     /// </remarks>
     /// <returns></returns>
-    public virtual async Task<List<string>> ReadAllLinesFromInputAsync(int puzzle, bool isSample = false)
+    public virtual async Task<List<string>> ReadAllLinesFromInputAsync(int puzzle, int part, bool isSample = false)
     {
         var resourcePath = "Resources/";
-        var resourceName = isSample ? $"AoC.2023.Puzzles.{puzzle}.sample.txt" : $"AoC.2023.Puzzles.{puzzle}.txt";
+        var resourceName = isSample ? $"AoC.Puzzles.{puzzle}.{part}.sample.txt" : $"AoC.Puzzles.{puzzle}.{part}.txt";
         var path = $"{resourcePath}{resourceName}";
 
         if (!File.Exists(path))
