@@ -17,7 +17,11 @@ Console.WriteLine("i/ *   O   O   * \\i");
 Console.WriteLine("/=================\\");
 Console.WriteLine("       |___|");
 
-var solvedPuzzles = new List<BasePuzzle>() {new Puzzle1()};
+var solvedPuzzles = new List<BasePuzzle>()
+{
+    new Puzzle1(),
+    new Puzzle2()
+};
 
 foreach (var puzzle in solvedPuzzles)
 {

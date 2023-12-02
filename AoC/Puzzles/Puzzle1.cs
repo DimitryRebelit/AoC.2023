@@ -9,7 +9,7 @@ public class Puzzle1 : BasePuzzle
     private static readonly string[] s_numbers = { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
 
     /// <inheritdoc />
-    protected override string Title => "--- Day 1: Trebuchet?! ---";
+    protected override string Title => "Day 1: Trebuchet?!";
 
     /// <inheritdoc />
     protected override async Task SolvePartOneAsync()

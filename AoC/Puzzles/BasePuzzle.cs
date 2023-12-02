@@ -37,12 +37,11 @@ public abstract class BasePuzzle
         Console.WriteLine();
         var stopwatch = new Stopwatch();
         stopwatch.Start();
-        Console.WriteLine($"{Title}");
+        Console.WriteLine($"--- {Title} ---");
         await SolvePartOneAsync();
         await SolvePartTwoAsync();
         stopwatch.Stop();
         Console.WriteLine($"--- Solved in {stopwatch.ElapsedMilliseconds}ms ---");
-        Console.WriteLine();
     }
 
     /// <summary>
