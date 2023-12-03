@@ -18,7 +18,7 @@ public class Puzzle3 : BasePuzzle
         var grid = GenerateGrid(input);
         var partNumbers = GetPartNumbers(grid);
         var symbols = GetSymbolPositions(grid);
-        var validPartNumbers = FilterValidPartNumbers(partNumbers, symbols);
+        var validPartNumbers = ExtractValidPartNumbers(partNumbers, symbols);
 
         var result = validPartNumbers.Select(x => int.Parse(x.Number)).Sum();
         Console.WriteLine($"Result: {result}");
@@ -33,11 +33,11 @@ public class Puzzle3 : BasePuzzle
         var partNumbers = GetPartNumbers(grid);
 
         var result = GetGearRatio(gearPositions, partNumbers);
-        Console.WriteLine("Result: " + result);
+        Console.WriteLine($"Result: {result}");
     }
 
     /// <summary>
-    ///     Generate matrix grid
+    ///     Generate matrix grid based on the input
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
@@ -57,7 +57,7 @@ public class Puzzle3 : BasePuzzle
     /// <param name="partNumbers"></param>
     /// <param name="symbols"></param>
     /// <returns></returns>
-    private List<PartNumber> FilterValidPartNumbers(List<PartNumber> partNumbers, List<(char, int, int)> symbols)
+    private List<PartNumber> ExtractValidPartNumbers(List<PartNumber> partNumbers, List<(char, int, int)> symbols)
     {
         const int Range = 1;
         var validPartNumbers = new List<PartNumber>();
