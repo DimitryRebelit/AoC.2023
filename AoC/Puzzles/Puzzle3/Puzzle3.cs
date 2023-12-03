@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using AoC.Puzzles.Puzzle3.Models;
 
 namespace AoC.Puzzles.Puzzle3;
 
@@ -19,7 +20,7 @@ public class Puzzle3 : BasePuzzle
         var symbols = ExtractStringFromGrid(@"[^\d.]+", grid);
         var validPartNumbers = ExtractValidPartNumbers(partNumbers, symbols);
 
-        var result = validPartNumbers.Select(x => int.Parse(x.Item1)).Sum();
+        var result = validPartNumbers.Select(x => int.Parse(x.Value)).Sum();
         Console.WriteLine($"Result: {result}");
     }
 
@@ -30,7 +31,7 @@ public class Puzzle3 : BasePuzzle
         var grid = GenerateGrid(input);
         var partNumbers = ExtractStringFromGrid(@"\d\w*", grid);
         var gearPositions = ExtractStringFromGrid(@"[^\d.]+", grid)
-            .Where(x => x.Item1 == "*")
+            .Where(x => x.Value == "*")
             .ToList();
 
         var result = GetGearRatio(gearPositions, partNumbers);
@@ -58,19 +59,19 @@ public class Puzzle3 : BasePuzzle
     /// <param name="partNumbers"></param>
     /// <param name="symbols"></param>
     /// <returns></returns>
-    private List<(string,int,int)> ExtractValidPartNumbers(List<(string,int,int)> partNumbers, List<(string, int, int)> symbols)
+    private List<GridElement> ExtractValidPartNumbers(List<GridElement> partNumbers, List<GridElement> symbols)
     {
         const int Range = 1;
-        var validPartNumbers = new List<(string,int,int)>();
+        var validPartNumbers = new List<GridElement>();
         foreach (var partNumber in partNumbers)
         {
             var coupledPartNumbers = symbols
                 .Where(value =>
-                    value.Item2 >= partNumber.Item2 - Range &&
-                    value.Item2 <= partNumber.Item2 + Range &&
-                    (value.Item3 >= partNumber.Item3 - Range && value.Item3 <= partNumber.Item3 + Range ||
-                     value.Item3 >= (partNumber.Item3 + (partNumber.Item1.Length - 1)) - Range &&
-                     value.Item3 <= (partNumber.Item3 + (partNumber.Item1.Length - 1)) + Range ))
+                    value.Row >= partNumber.Row - Range &&
+                    value.Row <= partNumber.Row + Range &&
+                    (value.StartColumn >= partNumber.StartColumn - Range && value.StartColumn <= partNumber.StartColumn + Range ||
+                     value.StartColumn >= (partNumber.EndColumn) - Range &&
+                     value.StartColumn <= (partNumber.EndColumn) + Range ))
                 .ToList();
 
             if(coupledPartNumbers.Count != 0)
@@ -86,15 +87,20 @@ public class Puzzle3 : BasePuzzle
     /// <param name="regexPattern"></param>
     /// <param name="grid"></param>
     /// <returns></returns>
-    private List<(string, int, int)> ExtractStringFromGrid(string regexPattern, char[][] grid)
+    private List<GridElement> ExtractStringFromGrid(string regexPattern, char[][] grid)
     {
-        var strings = new List<(string, int, int)>();
+        var strings = new List<GridElement>();
         for (var row = 0; row < grid.Length; row++)
         {
             var match = Regex.Match(new string(grid[row]), regexPattern);
             while (match.Success)
             {
-                strings.Add((match.Value, row, match.Index));
+                strings.Add(new GridElement()
+                {
+                    Value = match.Value,
+                    Row = row,
+                    StartColumn = match.Index
+                });
                 match = match.NextMatch();
             }
         }
@@ -108,7 +114,7 @@ public class Puzzle3 : BasePuzzle
     /// <param name="partNumbers"></param>
     /// <param name="grid"></param>
     /// <returns></returns>
-    private double GetGearRatio(List<(string,int, int)> gearPositions, List<(string,int, int)> partNumbers)
+    private double GetGearRatio(List<GridElement> gearPositions, List<GridElement> partNumbers)
     {
         const int ColumnRange = 1;
         const int RowRange = 1;
@@ -116,19 +122,19 @@ public class Puzzle3 : BasePuzzle
         var gearRatio = new List<double>();
         foreach (var gearPosition in gearPositions)
         {
-            var row = gearPosition.Item2;
-            var column = gearPosition.Item3;
+            var row = gearPosition.Row;
+            var column = gearPosition.StartColumn;
             var coupledPartNumbers = partNumbers
                 .Where(x =>
-                    x.Item2 >= row - RowRange &&
-                    x.Item2 <= row + RowRange &&
-                    (x.Item3 >= column - ColumnRange && x.Item3 <= column + ColumnRange ||
-                    x.Item3 + x.Item1.Length - 1 >= column - ColumnRange &&
-                    x.Item3 + x.Item1.Length - 1 <= column + ColumnRange ))
+                    x.Row >= row - RowRange &&
+                    x.Row <= row + RowRange &&
+                    (x.StartColumn >= column - ColumnRange && x.StartColumn <= column + ColumnRange ||
+                    x.EndColumn >= column - ColumnRange &&
+                    x.EndColumn <= column + ColumnRange ))
                 .ToList();
 
             if (coupledPartNumbers.Count == 2)
-                gearRatio.Add(int.Parse(coupledPartNumbers[0].Item1) * int.Parse(coupledPartNumbers[1].Item1));
+                gearRatio.Add(int.Parse(coupledPartNumbers[0].Value) * int.Parse(coupledPartNumbers[1].Value));
         }
 
         return gearRatio.Sum();
