@@ -1,12 +1,15 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace AoC.Puzzles;
+namespace AoC.Puzzles.Puzzle2;
 
 /// <inheritdoc cref="BasePuzzle"/>
 public class Puzzle2 : BasePuzzle
 {
     /// <inheritdoc cref="BasePuzzle"/>
     protected override string Title => "Day 2: Cube Conundrum";
+
+    /// <inheritdoc cref="BasePuzzle"/>
+    protected override int Day => 2;
 
     /// <inheritdoc cref="BasePuzzle"/>
     protected override async Task SolvePartOneAsync()

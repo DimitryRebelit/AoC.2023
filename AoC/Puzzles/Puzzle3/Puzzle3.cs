@@ -1,12 +1,15 @@
 ﻿using System.Text.RegularExpressions;
-using AoC.Puzzles.Models;
+using AoC.Puzzles.Puzzle3.Models;
 
-namespace AoC.Puzzles;
+namespace AoC.Puzzles.Puzzle3;
 
 public class Puzzle3 : BasePuzzle
 {
     /// <inheritdoc />
     protected override string Title => "Day 3: Gear Ratios";
+
+    /// <inheritdoc />
+    protected override int Day => 3;
 
     /// <inheritdoc />
     protected override async Task SolvePartOneAsync()

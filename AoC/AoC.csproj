@@ -8,39 +8,38 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Resources\AoC.Puzzles.1.1.sample.txt">
+    <None Update="Puzzles\Puzzle3\Resources\AoC.Puzzles.3.1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Puzzles\Puzzle3\Resources\AoC.Puzzles.3.1.sample.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Puzzles\Puzzle1\Resources\AoC.Puzzles.1.1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\AoC.Puzzles.1.1.txt">
+    <None Update="Puzzles\Puzzle1\Resources\AoC.Puzzles.1.1.sample.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\AoC.Puzzles.1.2.sample.txt">
+    <None Update="Puzzles\Puzzle1\Resources\AoC.Puzzles.1.2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\AoC.Puzzles.1.2.txt">
+    <None Update="Puzzles\Puzzle1\Resources\AoC.Puzzles.1.2.sample.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\AoC.Puzzles.2.1.sample.txt">
+    <None Update="Puzzles\Puzzle2\Resources\AoC.Puzzles.2.1.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\AoC.Puzzles.2.1.txt">
+    <None Update="Puzzles\Puzzle2\Resources\AoC.Puzzles.2.1.sample.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\AoC.Puzzles.2.2.sample.txt">
+    <None Update="Puzzles\Puzzle2\Resources\AoC.Puzzles.2.2.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\AoC.Puzzles.2.2.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\AoC.Puzzles.3.1.sample.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\AoC.Puzzles.3.1.txt">
+    <None Update="Puzzles\Puzzle2\Resources\AoC.Puzzles.2.2.sample.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

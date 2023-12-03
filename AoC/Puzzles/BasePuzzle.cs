@@ -10,12 +10,15 @@ namespace AoC.Puzzles;
 /// </remarks>
 public abstract class BasePuzzle
 {
-    private const string ResourcePath = "Resources/";
-
     /// <summary>
     ///     Title of the puzzle
     /// </summary>
     protected abstract string Title { get; }
+
+    /// <summary>
+    ///     Day of the puzzle
+    /// </summary>
+    protected abstract int Day { get; }
 
     /// <summary>
     ///     Solve part one of the puzzle
@@ -56,7 +59,7 @@ public abstract class BasePuzzle
     protected async Task<List<string>> ReadAllLinesFromInputAsync(int puzzle, int part, bool isSample = false)
     {
         var resourceName = isSample ? $"AoC.Puzzles.{puzzle}.{part}.sample.txt" : $"AoC.Puzzles.{puzzle}.{part}.txt";
-        var path = $"{ResourcePath}{resourceName}";
+        var path = $"Puzzles/Puzzle{Day}/Resources/{resourceName}";
 
         if (!File.Exists(path))
             throw new FileNotFoundException($"Input file not found: {path}");

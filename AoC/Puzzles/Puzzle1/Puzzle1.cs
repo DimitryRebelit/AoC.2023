@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
-using AoC.Puzzles;
+
+namespace AoC.Puzzles.Puzzle1;
 
 /// <summary>
 ///     Solution for Puzzle 1 of Advent of Code 2023.
@@ -10,6 +11,9 @@ public class Puzzle1 : BasePuzzle
 
     /// <inheritdoc />
     protected override string Title => "Day 1: Trebuchet?!";
+
+    /// <inheritdoc />
+    protected override int Day => 1;
 
     /// <inheritdoc />
     protected override async Task SolvePartOneAsync()

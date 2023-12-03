@@ -1,4 +1,7 @@
 ﻿using AoC.Puzzles;
+using AoC.Puzzles.Puzzle1;
+using AoC.Puzzles.Puzzle2;
+using AoC.Puzzles.Puzzle3;
 
 Console.WriteLine("         |");
 Console.WriteLine("        -+-");
