@@ -14,10 +14,11 @@ public class Puzzle3 : BasePuzzle
     /// <inheritdoc />
     protected override async Task SolvePartOneAsync()
     {
-        var input = await base.ReadAllLinesFromInputAsync(3, 1);
+        var input = await base.ReadAllLinesFromInputAsync(3, 1, true);
         var grid = GenerateGrid(input);
         var partNumbers = GetPartNumbers(grid);
-        var validPartNumbers = FilterValidPartNumbers(partNumbers, grid);
+        var symbols = GetSymbolPositions(grid);
+        var validPartNumbers = FilterValidPartNumbers(partNumbers, symbols);
 
         var result = validPartNumbers.Select(x => int.Parse(x.Number)).Sum();
         Console.WriteLine($"Result: {result}");
@@ -28,10 +29,10 @@ public class Puzzle3 : BasePuzzle
     {
         var input = await base.ReadAllLinesFromInputAsync(3, 1 );
         var grid = GenerateGrid(input);
-        var gearPositions = GetGearPositions(grid);
+        var gearPositions = GetSymbolPositions(grid).Where(x => x.Item1 == '*').ToList();
         var partNumbers = GetPartNumbers(grid);
 
-        var result = GetGearRatio(gearPositions, partNumbers, grid);
+        var result = GetGearRatio(gearPositions, partNumbers);
         Console.WriteLine("Result: " + result);
     }
 
@@ -51,38 +52,27 @@ public class Puzzle3 : BasePuzzle
     }
 
     /// <summary>
-    ///     Filter out all part numbers that are not around a gear symbol
+    ///     Filter out all part numbers that are not around a symbol
     /// </summary>
     /// <param name="partNumbers"></param>
-    /// <param name="grid"></param>
+    /// <param name="symbols"></param>
     /// <returns></returns>
-    private List<PartNumber> FilterValidPartNumbers(List<PartNumber> partNumbers, char[][] grid)
+    private List<PartNumber> FilterValidPartNumbers(List<PartNumber> partNumbers, List<(char, int, int)> symbols)
     {
+        const int Range = 1;
         var validPartNumbers = new List<PartNumber>();
         foreach (var partNumber in partNumbers)
         {
-            var isValid = false;
-            for (var row = partNumber.Row - 1; row <= partNumber.Row + 1; row++)
-            {
-                for (var column = partNumber.StartIndex - 1; column <= partNumber.EndIndex + 1; column++)
-                {
-                    if (row < 0 || row >= grid.Length || column < 0 || column >= grid[row].Length)
-                        continue;
+            var coupledPartNumbers = symbols
+                .Where(value =>
+                    value.Item2 >= partNumber.Row - Range &&
+                    value.Item2 <= partNumber.Row + Range &&
+                    (value.Item3 >= partNumber.StartIndex - Range && value.Item3 <= partNumber.StartIndex + Range ||
+                     value.Item3 >= partNumber.EndIndex - Range && value.Item3 <= partNumber.EndIndex + Range ))
+                .ToList();
 
-                    var character = grid[row][column];
-                    if (char.IsDigit(character) || character == '.')
-                        continue;
-
-                    isValid = true;
-                    break;
-                }
-
-                if (!isValid)
-                    continue;
-
+            if(coupledPartNumbers.Count != 0)
                 validPartNumbers.Add(partNumber);
-                break;
-            }
         }
 
         return validPartNumbers;
@@ -124,7 +114,7 @@ public class Puzzle3 : BasePuzzle
     /// <param name="partNumbers"></param>
     /// <param name="grid"></param>
     /// <returns></returns>
-    private double GetGearRatio(List<(int, int)> gearPositions, List<PartNumber> partNumbers, char[][] grid)
+    private double GetGearRatio(List<(char,int, int)> gearPositions, List<PartNumber> partNumbers)
     {
         const int ColumnRange = 1;
         const int RowRange = 1;
@@ -132,8 +122,8 @@ public class Puzzle3 : BasePuzzle
         var gearRatio = new List<double>();
         foreach (var gearPosition in gearPositions)
         {
-            var row = gearPosition.Item1;
-            var column = gearPosition.Item2;
+            var row = gearPosition.Item2;
+            var column = gearPosition.Item3;
             var coupledPartNumbers = partNumbers
                 .Where(x =>
                     x.Row >= row - RowRange &&
@@ -150,25 +140,23 @@ public class Puzzle3 : BasePuzzle
     }
 
     /// <summary>
-    ///     Get all gear positions from the grid
+    ///     Get all symbols from the grid
     /// </summary>
     /// <param name="grid"></param>
     /// <returns></returns>
-    private List<(int, int)> GetGearPositions(char[][] grid)
+    private List<(char, int, int)> GetSymbolPositions(char[][] grid)
     {
-        // Find all gear positions, that are the * symbols in the grid
-        var gearPositions = new List<(int, int)>();
+        const string RegexPattern = @"[^\d.]+";
+        var symbols = new List<(char, int, int)>();
         for (var row = 0; row < grid.Length; row++)
         {
-            for (var column = 0; column < grid[row].Length; column++)
+            var match = Regex.Match(new string(grid[row]), RegexPattern);
+            while (match.Success)
             {
-                if (grid[row][column] == '*')
-                {
-                    gearPositions.Add((row, column));
-                }
+                symbols.Add((match.Value[0], row, match.Index));
+                match = match.NextMatch();
             }
         }
-
-        return gearPositions;
+        return symbols;
     }
 }
