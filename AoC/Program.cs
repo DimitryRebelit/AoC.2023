@@ -20,7 +20,8 @@ Console.WriteLine("       |___|");
 var solvedPuzzles = new List<BasePuzzle>()
 {
     new Puzzle1(),
-    new Puzzle2()
+    new Puzzle2(),
+    new Puzzle3()
 };
 
 foreach (var puzzle in solvedPuzzles)
