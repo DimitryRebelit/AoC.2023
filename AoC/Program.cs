@@ -2,6 +2,7 @@
 using AoC.Puzzles.Puzzle1;
 using AoC.Puzzles.Puzzle2;
 using AoC.Puzzles.Puzzle3;
+using AoC.Puzzles.Puzzle4;
 
 Console.WriteLine("         |");
 Console.WriteLine("        -+-");
@@ -24,7 +25,8 @@ var solvedPuzzles = new List<BasePuzzle>()
 {
     new Puzzle1(),
     new Puzzle2(),
-    new Puzzle3()
+    new Puzzle3(),
+    new Puzzle4()
 };
 
 foreach (var puzzle in solvedPuzzles)

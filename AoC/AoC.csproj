@@ -48,6 +48,18 @@
     <None Update="Puzzles\Puzzle3\Resources\AoC.Puzzles.3.2.sample.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Puzzles\Puzzle4\Resources\AoC.Puzzles.4.1.sample.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Puzzles\Puzzle4\Resources\AoC.Puzzles.4.1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Puzzles\Puzzle4\Resources\AoC.Puzzles.4.2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Puzzles\Puzzle4\Resources\AoC.Puzzles.4.2.sample.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
